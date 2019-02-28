@@ -1,29 +1,42 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Pixel Art Maker!</title>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Monoton">
-    <link rel="stylesheet" href="styles.css">
-</head>
-<body>
-    <h1>Pixel Art Maker</h1>
+function makeGrid() {
+    console.log("makeGrid is running!")
 
-    <h2>Choose Grid Size</h2>
-    <form id="sizePicker">
-        Grid Height:
-        <input type="number" id="input_height" name="height" min="1" value="1">
-        Grid Width:
-        <input type="number" id="input_width" name="width" min="1" value="1">
-        <input type="submit">
-    </form>
+    var canvas, cell, gridHeight, gridwidth, rows;
 
-    <h2>Pick A Color</h2>
-    <input type="color" id="colorPicker">
+    canvas = $('#pixel_canvas');
+    gridHeight = $('#input_height').val();
+    gridWidth = $('#input_width').val();
 
-    <h2>Design Canvas</h2>
-    <table id="pixelCanvas"></table>
+    canvas.children().remove()
 
-    <script src="designs.js"></script>
-</body>
-</html>
+    for (x = 0; x < gridHeight; x++) {
+      canvas.append('<tr></tr>');
+    }
+
+    rows = $('tr');
+
+    for (y = 0; y < gridWidth; y++) {
+      rows.append('<td></td>');
+    }
+
+    cell = canvas.find('td');
+
+    cell.click(function() {
+      console.log("changeColor is running!");
+      var color;
+      color = $("colorPicker").val();
+      $(this).attr('bgcolor', color);
+    });
+
+    }
+
+    $(document)
+    var submitQuery;
+
+    submitQuery = $('input[type="submit"]')
+
+    submitQuery.click(function(event) {
+        event.preventDefault();
+        makeGrid();
+    });
+
