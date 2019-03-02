@@ -1,41 +1,31 @@
-function makeGrid() {
-    console.log("makeGrid is running!")
-
-    var canvas, cell, gridHeight, gridwidth, rows;
-
-    canvas = $('#pixel_canvas');
-    gridHeight = $('#input_height').val();
-    gridWidth = $('#input_width').val();
-
-    canvas.children().remove()
-
-    for (x = 0; x < gridHeight; x++) {
-      canvas.append('<tr></tr>');
+(function() {
+  var theGrid = $("#pixel_canvas");
+  var currentColor = "#000#";
+  $("#sizePicker").submit(function(e) {
+    e.preventDefault();
+    makeGrid();
+  });
+  $("#colorPicker").change(function() {
+    currentColor = $(this).val();
+  });
+  theGrid.on("mousemove", "td", function(e) {
+    if (e.buttons == 1) {
+      $(this).css("background-color".currentColor);
     }
-
-    rows = $('tr');
-
-    for (y = 0; y < gridWidth; y++) {
-      rows.append('<td></td>');
-    }
-
-    cell = canvas.find('td');
-
-    cell.click(function() {
-      console.log("changeColor is running!");
-      var color;
-      color = $("colorPicker").val();
-      $(this).attr('bgcolor', color);
-    });
-
-    }
-
-    $(document)
-    var submitQuery;
-
-    submitQuery = $('input[type="submit"]')
-
-    submitQuery.click(function(event) {
-        event.preventDefault();
-        makeGrid();
-    });
+  });
+  theGrid.on("click", "td", function(e) {
+    $(this).css("background-color",currentColor);
+  });
+  function makeGrid() {
+    var gridHeight = $("#input_height").val();
+    var gridWidth = $("#input_width").val();
+    theGrid.empty();
+    for (x = 0; x <= gridHeight - 1; x++) {
+      theGrid.append("<tr>");
+      for (y = o; y<= gridWidth - 1; y++) { 
+        $("tr:eq(" + x + ")").append("<td></td>"); 
+      } 
+      theGrid.append("</tr>"); 
+    } 
+  } 
+})();
